@@ -4,11 +4,11 @@ const menu = require('../data/menu.json');
 
 const fs = require('fs');
 
-router.get('/plates', (req, res) => {
+router.get("/", (req, res) => {
     res.send(menu);
 });
 
-router.post("/plates", (req, res) => {
+router.post("/", (req, res) => {
     const newMenu = [...menu, req.body];
 
     fs.writeFile("./data/menu.json", JSON.stringify(newMenu), (err) => {
@@ -17,7 +17,7 @@ router.post("/plates", (req, res) => {
     });
 });
 
-router.put("/plates/:id", (req, res) => {
+router.put("/:id", (req, res) => {
     let updatePlate;
 
     menu.forEach(element => {
@@ -49,7 +49,7 @@ router.put("/plates/:id", (req, res) => {
     });
 });
 
-router.delete("/plates/:id", (req,res) => {
+router.delete("/:id", (req,res) => {
     const newMenu = menu.filter(el => el.id !== req.params.id);
     console.log(newMenu)
     fs.writeFile("./data/menu.json", JSON.stringify(newMenu), (err) => {
